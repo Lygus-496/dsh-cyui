@@ -1,87 +1,123 @@
-# dsh-cyui
+# CYUI
 
-雨夜书桌 · DeepSeek Harness Web GUI 氛围主题。**不含角色形象，也不含任何第三方图片**——壁纸由你自己导入。
+> 给 DeepSeek Harness 的窗口换一个房间：雨夜、灯、和一点赛博。
 
-## 装法
+不是换配色。配色只改颜色，CYUI 改的是「这个窗口待在什么地方」——一张你自己选的背景图，一层压暗的暗角，一束跟着鼠标走的暖光，一条沿侧栏缓慢上行的数据流。界面还是那个界面，但坐进去的感觉变了。
 
-```powershell
-dsh plugin --profile desktop add "C:\path\to\dsh-cyui-2.0.0.tgz"
-```
+**包里不含任何图片。** 壁纸由你导入，装上是深紫渐变底，不会出现"图丢了"的空洞感。
 
-或手动：把 `dsh-cyui` 追加进 profile 的 `dsh.profile.bundles`，重启宿主。
+![插件图标](icon.png)
 
-桌面端没有页面刷新，client 改动一律靠重启生效。
+## 特点
 
-## 背景：自己导入
+### 背景是你自己的
 
-装上后界面右下角有一个很淡的圆按钮 `▣`，点开是背景面板：
+右下角一个几乎看不见的圆按钮 `▣`，点开是背景面板：
 
-| 控件 | 作用 |
+| 控件 | 说明 |
 |---|---|
-| 选择文件 | png / jpg / webp，≤24 MB |
+| 导入 | png / jpg / webp，≤24 MB，导入后自动压到宽 ≤2560 的 JPEG |
 | 缩放 | 100–320% |
 | 填充 | 铺满（裁切）/ 完整（留边）/ 拉伸铺满 / 平铺 |
 | 对齐 | 居中 / 顶部 / 底部 / 靠左 / 靠右 |
-| 压暗 | 0–80，越高图案越沉 |
-| 磨砂 | 0–24px，作用在骨架层与输入框（`backdrop-filter`，默认关闭以免吃 GPU） |
+| 压暗 | 0–80，越高图案越沉、文字越清楚 |
+| 磨砂 | 0–24px，骨架层与输入框的 `backdrop-filter`，默认关闭以免吃 GPU |
 
-图片与参数都存在本机 `localStorage`，重启后自动恢复。不需要重新导入。
+图片和参数都存在本机 `localStorage`，**重启自动恢复**，不用每次重新导入。状态行会如实告诉你结果——`已保存 320 KB · 重启后仍在`，或 `图片过大，浏览器存不下；已临时应用`。
 
-**不导入也能用**：没有图片时底色是深紫渐变 + 暗角 + 赛博网格，看起来是设计过的，不是“图丢了”。
+### 一套完整的两套配色
 
-图片会被压缩到宽度 ≤2560、JPEG q=0.86 再存，避免撑爆配额。状态行会明确告诉你结果——`已保存 xxx KB · 重启后仍在` 或 `图片过大，浏览器存不下；已临时应用`。
+`cyui-night` / `cyui-dawn`，各 76 个 `--dsw-alias-*` 令牌。夜是深紫配暖灯，晨是米白配冷灰。切换走 `theme` 服务注册，在外观设置里能看到、能选。
 
-## 五层
+令牌不只是提交给主题服务——还用 CSSOM 以 `important` 重写一遍。宿主的主题服务会在启动时把存储的配色**以内联 important 写在 `<body>` 上**，样式表里的 `!important` 压不过它；后写的内联声明才赢。这是重启后颜色不回退的关键。
 
-| 层 | 做法 |
-|---|---|
-| 令牌 | `theme.register()` 提交 `--dsw-alias-*`；同时用 CSSOM 以 `important` 重写这些变量（冷启动时宿主会抢先写一份自己的调色板，后写的 inline-important 才赢） |
-| 背景 | `var(--cyui-wall, none)` 画在 `<html>` 上，其余两层是暗角与压暗渐变 |
-| 骨架 | `_frame` / `_centerCol` / `_card` / composer 系列按实测类名直接设属性 |
-| 动效 | 指针暖光、顶部滚动进度、侧栏数据流与霓虹流光、行 hover 电磁边、四角取景框 |
-| 启幕 | 宿主注入的“来电”屏；若 `tapIndex` 未生效，client 侧兜底一份。点击后 CRT 坍缩 → 白幕展开 |
+### 会动的部分，克制
 
-## 已验证的宿主覆盖点
-
-下面这些类名与优先级结论是打点实测出来的，不是推断。宿主升级后哪里又亮起来，先对照这张表。
-
-| 目标 | 真实类名（哈希会变，用后缀匹配） | 为什么必须这样写 |
+| 效果 | 位置 | 做法 |
 |---|---|---|
-| 应用骨架 | `mP3x-q_frame`、`mP3x-q_centerCol` | 它们用 `background: var(--dsw-alias-bg-base)`；主题服务把变量写在 `<body>` 的**内联 important** 上，样式表的 `!important` 压不过，所以直接改 `background-color` 属性 |
-| 对话区容器 | `an3WzG_root`、`an3WzG_scrollBody` | 同上，且里面还有自己的滚动容器 |
-| 输入框座位 | `an3WzG_composerSeat`、`an3WzG_composerStack` | 座位本身深了不代表内容深，里面还有一层 |
-| 输入框卡片 | `GRgSLq_card` | `_card` 这个后缀与 composer 无关，只能从 composer 子树里定位，否则会误伤消息卡片 |
-| 输入框按钮 | `composerStack button` / `[role=button]` | “+”按钮是浅底深字，刷深底的同时要把 `color` 提亮，否则图标变黑 |
+| 指针暖光 | 全局，跟随鼠标 | 560px 径向光，`translate3d` + `rAF` 合帧 |
+| 滚读进度 | 顶部 2px | 青→紫→品红渐变 |
+| 数据流 | 侧栏 | 34px 间距的青色细线，5.5s 上行 |
+| 霓虹流光 | 侧栏与对话区的分界线 | 24% 高的光带，6.5s 下行，压在 2px 宽的线上 |
+| 电磁边 | 菜单行 / 会话行 | 左缘数据轨常驻，hover 时通电、外框、内发光、光带横滚 |
+| 取景框 | 四角 | 16px 直角括号 |
+| 数据网格 | 整个窗口 | 36px 网格，径向遮罩只留边缘，26s 缓漂 |
+
+全部是 `background-image` / `box-shadow` / `background-position` 动画。**没有一条碰布局**——最坏情况是多一点光，不会点不动。
+
+### 启幕像接一通电话
+
+打开时不是直接出现界面，而是一个来电画面：透视网格、猫耳耳机、脉冲环、`INCOMING / LINK`、聪音的名字。
+
+点通话按钮后：
+
+```
+0–520ms   来电屏 clip-path 收拢 → 压成一条横线，brightness 拉到 9 过曝
+400ms     白幕从那条线的位置开始，带着 CRT 扫描行展开
+22–30%    线上闪一次（brightness 11）
+62%       铺满全屏
+72%       整屏再闪一次（brightness 3.6）
+1.3s      两个节点移除，界面接管
+```
+
+宿主注入版是纯 CSS（`checkbox` + 兄弟选择器），CSP 拦掉脚本也照样能接；如果注入没生效，客户端会画一份简化的兜底屏，3.4 秒自动退场。
+
+### 菜单图标是手绘的
+
+水杯、企鹅、猫耳耳机、收音机——16×16 逐像素画的，替换宿主菜单里的默认字形。选中态由 `aria-current` / `aria-selected` 驱动，不用猜。
+
+## 安装
+
+```powershell
+dsh plugin --profile desktop add https://github.com/Lygus-496/dsh-cyui/releases/download/v1.0.3/dsh-cyui-1.0.3.tgz
+```
+
+或下载 tarball 后：
+
+```powershell
+dsh plugin --profile desktop add "C:\path\to\dsh-cyui-1.0.3.tgz"
+```
+
+**装完重启一次。** 桌面端没有页面刷新，client 改动一律靠重启生效。
+
+## 兼容性是这一路最花功夫的部分
+
+上一版曾把整个窗口的交互锁死——原因是在宿主元素上写了 `overflow: hidden` / `isolation` / `position` / 超高 `z-index`。现在的铁律：
+
+- 只改画出来的东西：`color`、`background-color`、`background-image`、`box-shadow`、`border-color`、`backdrop-filter`
+- 自有元素一律 `pointer-events: none`，`z-index ≤ 5`
+- 不覆盖宿主容器的背景（曾经把余额小鲸鱼挂件涂成黑块）
+- 选择器先定位到侧栏/对话区再匹配，且只认矮行
+- `<html data-dsh-cyui="off">` 一键关停所有效果
+
+### 实测过的宿主覆盖点
+
+下面这些类名不是从文档抄的，是在真机上逐层打点测出来的。宿主升级后哪里又亮起来，先对照这张表。
+
+| 目标 | 类名（哈希会变，用后缀匹配） | 为什么必须这样写 |
+|---|---|---|
+| 应用骨架 | `*_frame`、`*_centerCol` | 用 `background: var(--dsw-alias-bg-base)`，变量可能被内联 important 覆盖 → 改为直接设 `background-color` 属性 |
+| 对话区 | `an3WzG_root`、`an3WzG_scrollBody` | 同上，且内部还有滚动容器 |
+| 输入框 | `an3WzG_composerSeat`、`composerStack`、`GRgSLq_card` | 座位深了不代表内容深；`_card` 与 composer 无关，必须从子树里定位 |
 | 消息气泡 | `LOmm4q_bubble` | 底色 `rgb(237,243,254)` 浅蓝白，与 `bg-base` 无关，只能按气泡自己的类名覆盖 |
-| 浮层 | `[role="dialog"]`、`_modal`、`_popover` 等 | 不能清成透明，否则文字压在壁纸上；也不能用宽泛的 `menu` 匹配，会刷到侧栏 |
-| 标题栏 / 侧栏 | `mP3x-q_frame:before`、`wtg9ga_root` | Windows 下用 `--dsw-specific-sidebar-fill`，不是 `bg-base` |
+| 浮层 | `[role="dialog"]`、`_modal`、`_popover` | 不能清成透明；也不能用宽泛的 `menu`，会刷到侧栏 |
+| 标题栏 / 侧栏 | `*_frame:before`、`wtg9ga_root` | Windows 下用 `--dsw-specific-sidebar-fill`，不是 `bg-base` |
 
 两条通用原则：
 
-1. **属性 > 变量**：任何 `var()` 驱动的填充都可能被内联 important 改写，直接设 `background-color` 才稳。
-2. **限定祖先**：`_root` `_card` `_header` 这类后缀到处都有，必须挂在具体子树上。
+1. **属性 > 变量** —— 任何 `var()` 驱动的填充都可能被内联 important 改写。
+2. **限定祖先** —— `_root` `_card` `_header` 这类后缀到处都有，必须挂在具体子树上。
 
-排查“某处还是白的”的正确顺序：扫一遍 `background-color` 接近纯白的元素并打印 `className|颜色`，不要靠肉眼在截图里找；拿到类名后确认是否需要祖先限定；改底色时同时给 `color`；不要用“给 body 铺不透明底色”这种兜底，它会连壁纸一起盖掉。
-
-## 兼容性铁律
-
-上一版曾把整个窗口的交互锁死，原因是在宿主元素上写了 `overflow: hidden` / `isolation` / `position` / 超高 `z-index`。现在的约束：
-
-- 只改「画出来的东西」：`color`、`background-color`、`background-image`、`box-shadow`、`border-color`、`backdrop-filter`
-- 自有元素一律 `pointer-events: none` 且 `z-index ≤ 5`（面板与按钮除外，它们是交互元素）
-- 不覆盖宿主容器的背景
-- 选择器先定位到侧栏/对话区再匹配，且只认矮行（高度 < 72px、非 fixed/absolute）
-- `<html data-dsh-cyui="off">` 一键关停所有效果
-
-## 素材
-
-- **物件图标**（水杯 / 企鹅 / 猫耳耳机 / 收音机）：逐像素手绘，原创
-- **无第三方图片**：包内不含任何壁纸，用户自行导入
-- **代码**：MIT
-
-## 重新生成
+## 开发
 
 ```powershell
-python scripts/pixel-art.py       # 四个物件图标
-node   scripts/build-client.mjs   # 内联图标与令牌 → lib/client.js
+node scripts/build-client.mjs   # 内联图标与令牌 → lib/client.js
+python scripts/pixel-art.py     # 重新生成四个物件图标
+python scripts/make-icon.py     # 从原图生成插件图标
 ```
+
+推送用 `push.ps1`（本机 Git 缺 `git-remote-https`，脚本走便携版 `E:\Git-mini`）。
+
+## 许可
+
+MIT。图标为插件作者提供的原创头像；包内不含第三方图片素材。
