@@ -90,12 +90,7 @@ for name in files:
 tree = call("POST", f"/repos/{OWNER}/{REPO}/git/trees", {"tree": entries})
 print("tree", tree["sha"])
 
-message = ("feat: CYUI 1.0.2\n\n"
-           "雨夜书桌氛围主题 for DeepSeek Harness，壁纸由用户自行导入。\n\n"
-           "- 背景面板：导入、缩放、填充、对齐、压暗、磨砂，全部持久化\n"
-           "- 无第三方素材，安装后默认渐变底\n"
-           "- 宿主类名实测校准（_frame / _centerCol / _card / composer / _bubble / 浮层）\n"
-           "- 只改绘制属性，不动布局")
+message = "feat: plugin icon + locale metadata (1.0.3)"
 head = call("GET", f"/repos/{OWNER}/{REPO}/git/refs/heads/main")
 parent = head["object"]["sha"]
 commit = call("POST", f"/repos/{OWNER}/{REPO}/git/commits",
