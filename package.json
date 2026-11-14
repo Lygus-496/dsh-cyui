@@ -1,12 +1,14 @@
 {
     "name":  "dsh-cyui",
-    "version":  "1.0.2",
+    "version":  "1.0.3",
     "description":  "CYUI — 雨夜书桌氛围主题 for DeepSeek Harness：可导入/缩放/压暗/磨砂的背景层 + 来电式启幕 + 赛博数据流。",
     "type":  "module",
     "main":  "lib/index.js",
     "exports":  {
                     ".":  "./lib/index.js",
                     "./client":  "./lib/client.js",
+                    "./icon":  "./icon.png",
+                    "./locale/*.json":  "./locale/*.json",
                     "./package.json":  "./package.json"
                 },
     "keywords":  [
@@ -22,7 +24,9 @@
                   "lib/index.js",
                   "cordis.patch.yml",
                   "README.md",
-                  "LICENSE"
+                  "LICENSE",
+                  "icon.png",
+                  "locale/*.json"
               ],
     "license":  "MIT",
     "dsh":  {
@@ -43,5 +47,6 @@
                        "type":  "git",
                        "url":  "https://github.com/Lygus-496/dsh-cyui"
                    },
-    "homepage":  "https://github.com/Lygus-496/dsh-cyui#readme"
+    "homepage":  "https://github.com/Lygus-496/dsh-cyui#readme",
+    "icon":  "./icon.png"
 }
