@@ -1,0 +1,4 @@
+# dsh-cyui bundle patch — inserts the web client row of this plugin.
+- insert:
+    - id: dsh-cyui
+      name: dsh-cyui

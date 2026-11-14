@@ -1,0 +1,6 @@
+node_modules/
+*.tgz
+assets-unpublished/
+test/www/
+reference/
+__pycache__/
