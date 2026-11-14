@@ -1,0 +1,152 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1d1826"/>
+      <stop offset="0.55" stop-color="#241d30"/>
+      <stop offset="1" stop-color="#171320"/>
+    </linearGradient>
+    <linearGradient id="night" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#101a2e"/>
+      <stop offset="1" stop-color="#1b2740"/>
+    </linearGradient>
+    <radialGradient id="lampGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#f0b27a" stop-opacity=".55"/>
+      <stop offset="0.55" stop-color="#e09a5e" stop-opacity=".18"/>
+      <stop offset="1" stop-color="#e09a5e" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cone" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f6c48c" stop-opacity=".30"/>
+      <stop offset="1" stop-color="#f6c48c" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="deskTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4a3a30"/>
+      <stop offset="1" stop-color="#33261f"/>
+    </linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#211a29"/>
+      <stop offset="1" stop-color="#141019"/>
+    </linearGradient>
+  </defs>
+
+  <!-- wall + floor -->
+  <rect width="1600" height="1000" fill="url(#wall)"/>
+  <path d="M0 720h1600v280H0z" fill="url(#floor)"/>
+  <path d="M0 720h1600" stroke="#2f2739" stroke-width="2"/>
+
+  <!-- window -->
+  <g>
+    <rect x="980" y="120" width="470" height="380" rx="10" fill="url(#night)"/>
+    <!-- far lights -->
+    <circle cx="1050" cy="420" r="2.2" fill="#f0b27a" opacity=".7"/>
+    <circle cx="1092" cy="448" r="1.8" fill="#c9a0dc" opacity=".6"/>
+    <circle cx="1160" cy="435" r="2.4" fill="#f0b27a" opacity=".5"/>
+    <circle cx="1240" cy="455" r="1.6" fill="#9ad0e0" opacity=".55"/>
+    <circle cx="1320" cy="440" r="2.0" fill="#f0b27a" opacity=".6"/>
+    <!-- rain -->
+    <g stroke="#8fb2d8" stroke-width="1.4" opacity=".32" stroke-linecap="round">
+      <path d="M1010 150l-12 34M1050 170l-12 34M1090 145l-12 34M1130 185l-12 34M1170 155l-12 34M1210 195l-12 34M1250 150l-12 34M1290 180l-12 34M1330 160l-12 34M1370 195l-12 34"/>
+      <path d="M1020 250l-12 34M1060 275l-12 34M1100 245l-12 34M1145 285l-12 34M1185 255l-12 34M1225 295l-12 34M1265 250l-12 34M1305 280l-12 34M1345 260l-12 34M1385 295l-12 34"/>
+    </g>
+    <!-- frame + bars -->
+    <rect x="980" y="120" width="470" height="380" rx="10" fill="none" stroke="#3b3148" stroke-width="12"/>
+    <path d="M1215 126v368M986 310h458" stroke="#3b3148" stroke-width="10"/>
+    <!-- sill -->
+    <rect x="962" y="500" width="506" height="16" rx="6" fill="#33283c"/>
+  </g>
+
+  <!-- bookshelf -->
+  <g>
+    <rect x="70" y="300" width="180" height="420" rx="8" fill="#2b2233"/>
+    <rect x="70" y="300" width="180" height="420" rx="8" fill="none" stroke="#3b3148" stroke-width="4"/>
+    <path d="M70 440h180M70 580h180" stroke="#3b3148" stroke-width="8"/>
+    <!-- books row 1 -->
+    <g>
+      <rect x="88" y="330" width="16" height="100" rx="3" fill="#7a5c8c"/>
+      <rect x="108" y="340" width="14" height="90" rx="3" fill="#b4703c"/>
+      <rect x="126" y="326" width="18" height="104" rx="3" fill="#4f7d5c"/>
+      <rect x="148" y="348" width="13" height="82" rx="3" fill="#c9a0dc"/>
+      <rect x="165" y="334" width="16" height="96" rx="3" fill="#8a6b9c"/>
+      <rect x="185" y="352" width="12" height="78" rx="2" fill="#d9a06a"/>
+      <rect x="201" y="330" width="16" height="100" rx="3" fill="#5b6f9c"/>
+      <rect x="221" y="344" width="13" height="86" rx="3" fill="#a06a8c"/>
+    </g>
+    <!-- books row 2 -->
+    <g opacity=".9">
+      <rect x="90" y="470" width="15" height="92" rx="3" fill="#5b6f9c"/>
+      <rect x="109" y="482" width="18" height="80" rx="3" fill="#c9a0dc"/>
+      <rect x="131" y="466" width="13" height="96" rx="3" fill="#b4703c"/>
+      <rect x="148" y="476" width="16" height="86" rx="3" fill="#4f7d5c"/>
+      <rect x="168" y="488" width="12" height="74" rx="2" fill="#8a6b9c"/>
+      <rect x="184" y="470" width="18" height="92" rx="3" fill="#d9a06a"/>
+      <rect x="206" y="480" width="14" height="82" rx="3" fill="#7a5c8c"/>
+    </g>
+    <!-- plant on top -->
+    <g>
+      <path d="M150 300c-16-24 6-40 10-56 6 16 26 30 8 56z" fill="#4f7d5c" opacity=".85"/>
+      <rect x="140" y="296" width="34" height="8" rx="3" fill="#b4703c"/>
+    </g>
+  </g>
+
+  <!-- poster on wall -->
+  <g opacity=".8">
+    <rect x="360" y="160" width="180" height="240" rx="6" fill="#2b2233" stroke="#3b3148" stroke-width="6"/>
+    <circle cx="450" cy="250" r="46" fill="#c9a0dc" opacity=".35"/>
+    <path d="M404 340c22-52 46-52 68 0" fill="#f0b27a" opacity=".35"/>
+    <rect x="392" y="352" width="116" height="8" rx="4" fill="#4a3e59"/>
+  </g>
+
+  <!-- desk -->
+  <g>
+    <rect x="330" y="640" width="900" height="26" rx="8" fill="url(#deskTop)"/>
+    <rect x="368" y="666" width="22" height="180" rx="6" fill="#2b2233"/>
+    <rect x="1170" y="666" width="22" height="180" rx="6" fill="#2b2233"/>
+    <rect x="330" y="640" width="900" height="26" rx="8" fill="none" stroke="#5a463a" stroke-width="2" opacity=".7"/>
+  </g>
+
+  <!-- lamp + light cone -->
+  <g>
+    <path d="M960 470L780 640h360L960 470z" fill="url(#cone)"/>
+    <circle cx="960" cy="520" r="220" fill="url(#lampGlow)"/>
+    <path d="M930 520l60-120 60 120z" fill="#3b3148"/>
+    <path d="M942 520l48-96 48 96z" fill="#f6c48c" opacity=".92"/>
+    <rect x="954" y="520" width="12" height="118" rx="5" fill="#4a3e59"/>
+    <ellipse cx="960" cy="640" rx="44" ry="10" fill="#33283c"/>
+  </g>
+
+  <!-- mug -->
+  <g>
+    <rect x="700" y="596" width="46" height="44" rx="8" fill="#efe4d6"/>
+    <path d="M746 608h8a10 10 0 0 1 0 20h-8" fill="none" stroke="#d9c9b8" stroke-width="5"/>
+    <rect x="704" y="600" width="38" height="7" rx="3" fill="#c98a52"/>
+    <path d="M714 586c4-6-3-9 1-15M730 588c4-6-3-9 1-15" stroke="#c9a0dc" stroke-width="2.4" fill="none" opacity=".5" stroke-linecap="round"/>
+  </g>
+
+  <!-- headset on desk -->
+  <g transform="translate(1000 596) rotate(-12)">
+    <path d="M0 22a26 26 0 0 1 52 0" fill="none" stroke="#c9a0dc" stroke-width="6" stroke-linecap="round"/>
+    <rect x="-8" y="18" width="12" height="26" rx="6" fill="#2b2230"/>
+    <rect x="48" y="18" width="12" height="26" rx="6" fill="#2b2230"/>
+  </g>
+
+  <!-- penguin plush -->
+  <g transform="translate(1080 566) scale(1.1)">
+    <ellipse cx="0" cy="30" rx="26" ry="30" fill="#3b3450"/>
+    <ellipse cx="0" cy="36" rx="17" ry="20" fill="#f4ece2"/>
+    <circle cx="-8" cy="18" r="3.4" fill="#17131c"/>
+    <circle cx="8" cy="18" r="3.4" fill="#17131c"/>
+    <path d="M0 26l5 4-5 4-5-4z" fill="#f0b27a"/>
+    <path d="M-20 4c8 4 32 4 40 0l-3 8c-11 4-23 4-34 0z" fill="#c9a0dc" opacity=".9"/>
+  </g>
+
+  <!-- open notebook -->
+  <g>
+    <path d="M560 640l150-14 150 14-150 16z" fill="#f6efe6" opacity=".92"/>
+    <path d="M710 626v30" stroke="#d9c9b8" stroke-width="2"/>
+    <path d="M590 636l100-8M590 644l100-8" stroke="#c9b8a6" stroke-width="2" opacity=".7"/>
+    <path d="M736 628l96 8M736 636l96 8" stroke="#c9b8a6" stroke-width="2" opacity=".7"/>
+  </g>
+
+  <!-- rug -->
+  <ellipse cx="800" cy="880" rx="420" ry="70" fill="#2a2233" opacity=".85"/>
+  <ellipse cx="800" cy="880" rx="420" ry="70" fill="none" stroke="#3b3148" stroke-width="3"/>
+</svg>

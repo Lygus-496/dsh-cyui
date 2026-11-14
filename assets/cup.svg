@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="cupBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f6efe6"/>
+      <stop offset="1" stop-color="#d9c9b8"/>
+    </linearGradient>
+    <linearGradient id="cupTea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c98a52"/>
+      <stop offset="1" stop-color="#8a5a32"/>
+    </linearGradient>
+  </defs>
+  <!-- steam -->
+  <path d="M25 16c4-4-2-7 2-11" fill="none" stroke="#c9a0dc" stroke-width="2" stroke-linecap="round" opacity=".55"/>
+  <path d="M34 18c4-4-2-7 2-11" fill="none" stroke="#c9a0dc" stroke-width="2" stroke-linecap="round" opacity=".35"/>
+  <!-- handle -->
+  <path d="M44 27h5a7 7 0 0 1 0 14h-5" fill="none" stroke="#c9b8a6" stroke-width="4" stroke-linecap="round"/>
+  <!-- body -->
+  <path d="M16 21h29v17a11 11 0 0 1-11 11H27a11 11 0 0 1-11-11z" fill="url(#cupBody)"/>
+  <!-- tea -->
+  <path d="M19 25h23v4H19z" fill="url(#cupTea)" opacity=".9"/>
+  <!-- rim -->
+  <rect x="15" y="19" width="31" height="4" rx="2" fill="#efe4d6"/>
+  <!-- saucer -->
+  <ellipse cx="31" cy="53" rx="17" ry="4" fill="#e2d3c2"/>
+  <ellipse cx="31" cy="52" rx="15" ry="3" fill="#f1e6d8"/>
+</svg>
