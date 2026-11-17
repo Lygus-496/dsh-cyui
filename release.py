@@ -36,7 +36,7 @@ def call(method, url, payload=None, raw=None, ctype="application/json"):
 
 
 notes = (ROOT / "README.md").read_text(encoding="utf-8")
-tag = "v1.0.4"
+tag = "v1.0.5"
 
 try:
     call("GET", f"{API}/repos/{OWNER}/{REPO}/releases/tags/{tag}")
@@ -45,7 +45,7 @@ except SystemExit:
     rel = call("POST", f"{API}/repos/{OWNER}/{REPO}/releases", {
         "tag_name": tag,
         "target_commitish": "main",
-        "name": "CYUI 1.0.4",
+        "name": "CYUI 1.0.5",
         "body": notes,
         "draft": False,
         "prerelease": False,
@@ -53,7 +53,7 @@ except SystemExit:
     print("release:", rel["html_url"])
 
 rel = call("GET", f"{API}/repos/{OWNER}/{REPO}/releases/tags/{tag}")
-tgz = ROOT / "dsh-cyui-1.0.4.tgz"
+tgz = ROOT / "dsh-cyui-1.0.5.tgz"
 upload = f"https://uploads.github.com/repos/{OWNER}/{REPO}/releases/{rel['id']}/assets?name={tgz.name}"
 asset = call("POST", upload, raw=tgz.read_bytes(), ctype="application/gzip")
 print("asset:", asset["browser_download_url"], f"{asset['size']//1024} KB")

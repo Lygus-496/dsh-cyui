@@ -1,6 +1,6 @@
 {
     "name":  "dsh-cyui",
-    "version":  "1.0.5",
+    "version":  "1.1.0",
     "description":  "给 DeepSeek Harness 的窗口换一个房间：可导入的背景层（缩放/填充/压暗/磨砂）、指针暖光、赛博数据流、来电式启幕。包内不含图片。",
     "type":  "module",
     "main":  "lib/index.js",
