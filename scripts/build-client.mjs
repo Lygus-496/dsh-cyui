@@ -65,8 +65,8 @@ for (const [placeholder, [file, mime]] of Object.entries(assets)) {
   body = body.replace(placeholder, JSON.stringify(`data:${mime};base64,${bytes.toString("base64")}`));
 }
 
-body = body.replace("__TOKENS_NIGHT__", JSON.stringify(tokens.night, null, "\t"));
-body = body.replace("__TOKENS_DAWN__", JSON.stringify(tokens.dawn, null, "\t"));
+const single = tokens.cyui || tokens.night;
+body = body.replace("__TOKENS_CYUI__", JSON.stringify(single, null, "\t"));
 
 const leftovers = body.match(/__[A-Z_]+__/g);
 if (leftovers) throw new Error(`unreplaced placeholders: ${leftovers.join(", ")}`);
@@ -74,6 +74,6 @@ if (leftovers) throw new Error(`unreplaced placeholders: ${leftovers.join(", ")}
 fs.writeFileSync(OUT, body, "utf8");
 
 const kb = (n) => `${(n / 1024).toFixed(1)} KB`;
-console.log(`tokens: night=${Object.keys(tokens.night).length} dawn=${Object.keys(tokens.dawn).length}`);
+console.log(`tokens: cyui=${Object.keys(tokens.night).length} dawn=${Object.keys(tokens.dawn).length}`);
 console.log(`assets: ${Object.values(assets).map(([f]) => f).join(", ")} (${kb(inlineBytes)} raw)`);
 console.log(`wrote ${path.relative(ROOT, OUT)} (${kb(fs.statSync(OUT).size)})`);
