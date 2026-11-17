@@ -4,3 +4,4 @@ assets-unpublished/
 test/www/
 reference/
 __pycache__/
+.audit/
